@@ -35,9 +35,9 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSCameraUsageDescription</key>
-	<string>Need to access camera to click photos to make Memes</string>
+	<string>To click photos to make Memes</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Need to access photo library to make Memes</string>
+	<string>To store Memes</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -45,5 +45,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To make Memes</string>
 </dict>
 </plist>
