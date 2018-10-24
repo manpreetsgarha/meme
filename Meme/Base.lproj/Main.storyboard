@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,73 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="meme" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pfh-Vt-Jgr" userLabel="ImageView">
+                                <rect key="frame" x="0.0" y="44" width="375" height="685"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="contentMode">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmU-eJ-X1e">
+                                <rect key="frame" x="0.0" y="729" width="375" height="49"/>
+                                <items>
+                                    <barButtonItem title="Gallary" id="OvU-kK-IiO">
+                                        <connections>
+                                            <action selector="openImageController:" destination="BYZ-38-t0r" id="HZO-JQ-G5b"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem tag="1" title="Camera" id="K3H-7M-IiE">
+                                        <connections>
+                                            <action selector="openImageController:" destination="BYZ-38-t0r" id="S7k-IY-wlO"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="TOP" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7ZE-RJ-rWW" userLabel="TopText">
+                                <rect key="frame" x="163" y="94" width="49" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" returnKeyType="done"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="BOTTOM" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YcQ-oN-ehh" userLabel="BottomText">
+                                <rect key="frame" x="147" y="649" width="81" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" returnKeyType="done"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="YcQ-oN-ehh" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="10I-zu-5lG"/>
+                            <constraint firstItem="pfh-Vt-Jgr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7bu-6T-vOv"/>
+                            <constraint firstItem="7ZE-RJ-rWW" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="WuM-dR-Sfg"/>
+                            <constraint firstItem="fmU-eJ-X1e" firstAttribute="top" secondItem="YcQ-oN-ehh" secondAttribute="bottom" constant="50" id="ZQg-V4-s7G"/>
+                            <constraint firstItem="pfh-Vt-Jgr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="d9E-3F-MPO"/>
+                            <constraint firstItem="pfh-Vt-Jgr" firstAttribute="bottom" secondItem="fmU-eJ-X1e" secondAttribute="top" id="dqq-d3-9Ul"/>
+                            <constraint firstItem="fmU-eJ-X1e" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hzf-dY-Gyb"/>
+                            <constraint firstItem="fmU-eJ-X1e" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="oI9-o3-Pge"/>
+                            <constraint firstItem="pfh-Vt-Jgr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="wJy-za-aeJ"/>
+                            <constraint firstItem="7ZE-RJ-rWW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="wgg-rd-4az"/>
+                            <constraint firstItem="fmU-eJ-X1e" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="xUI-5k-HeD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="bottomText" destination="YcQ-oN-ehh" id="Vw4-yc-qet"/>
+                        <outlet property="cameraButton" destination="K3H-7M-IiE" id="cqW-Ji-skC"/>
+                        <outlet property="imageView" destination="pfh-Vt-Jgr" id="zq9-6K-j1H"/>
+                        <outlet property="topText" destination="7ZE-RJ-rWW" id="E4M-xC-rdR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="117.59999999999999" y="118.29085457271366"/>
         </scene>
     </scenes>
 </document>
