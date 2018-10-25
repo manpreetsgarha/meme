@@ -165,7 +165,7 @@ extension ViewController: UITextFieldDelegate{
             NSAttributedStringKey.strokeColor.rawValue: UIColor.black,
             NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
             NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSAttributedStringKey.strokeWidth.rawValue: 4]
+            NSAttributedStringKey.strokeWidth.rawValue: -4]
         setTextField(topTextField, text: "TOP", defaultAttr: memeTextAttributes)
         setTextField(bottomTextField, text: "BOTTOM", defaultAttr: memeTextAttributes)
     }
@@ -176,6 +176,7 @@ extension ViewController: UITextFieldDelegate{
         textField.defaultTextAttributes = defaultAttr
         textField.textAlignment = .center
         textField.text = text
+        textField.borderStyle = .none
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
