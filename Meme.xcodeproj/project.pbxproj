@@ -113,16 +113,12 @@
 			isa = PBXGroup;
 			children = (
 				2D3DC4322180024A007749BA /* AppDelegate.swift */,
-				2D3DC4342180024A007749BA /* EditMemeViewController.swift */,
+				2DC500EF21EBBE9B0094067F /* controllers */,
 				2D3DC4362180024A007749BA /* Main.storyboard */,
 				2D3DC43B2180024B007749BA /* LaunchScreen.storyboard */,
 				2D3DC43E2180024C007749BA /* Info.plist */,
 				2DBB61712180200000665B25 /* Meme.swift */,
-				2DC1D64A21AF700000D4FB19 /* SentTableViewController.swift */,
-				2DC1D64E21AF806200D4FB19 /* MemeDetailViewController.swift */,
-				2DF9D52521C6C16C008B64B5 /* SentMemeCollectionViewController.swift */,
 				2DF9D52721C6C235008B64B5 /* SentMemeCollectionViewCell.swift */,
-				2DB34EEB21DA087C00B67D6D /* SentTabBarController.swift */,
 				2DC9952821EB3D020005A455 /* SentMemeTableViewCell.swift */,
 			);
 			path = Meme;
@@ -144,6 +140,18 @@
 				2D3DC4542180024C007749BA /* Info.plist */,
 			);
 			path = MemeUITests;
+			sourceTree = "<group>";
+		};
+		2DC500EF21EBBE9B0094067F /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2D3DC4342180024A007749BA /* EditMemeViewController.swift */,
+				2DC1D64A21AF700000D4FB19 /* SentTableViewController.swift */,
+				2DC1D64E21AF806200D4FB19 /* MemeDetailViewController.swift */,
+				2DF9D52521C6C16C008B64B5 /* SentMemeCollectionViewController.swift */,
+				2DB34EEB21DA087C00B67D6D /* SentTabBarController.swift */,
+			);
+			path = controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
