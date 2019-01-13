@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController{
+class EditMemeViewController: UIViewController{
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -19,8 +19,7 @@ class ViewController: UIViewController{
     
     @IBOutlet weak var topBar: UINavigationBar!
     @IBOutlet weak var bottomBar: UIToolbar!
-    
-    
+
     override func viewDidLoad() {
         initTextFields()
         initShare()
@@ -38,19 +37,28 @@ class ViewController: UIViewController{
         unsubscribeFromKeyboardNotifications()
     }
 
-    @IBAction func cancelClick(_ sender: UIBarButtonItem) {
+    fileprivate func setDefaultUi() {
         initTextFields()
         initImageView()
         initShare()
     }
     
+    fileprivate func exit() {
+        performSegue(withIdentifier: "unwindToSentTabBarController", sender: self)
+    }
+    
+    @IBAction func cancelClick(_ sender: UIBarButtonItem) {
+        setDefaultUi()
+        exit()
+    }
+    
     @IBAction func shareClick(_ sender: Any) {
         share()
     }
-}
+ }
 
 //MARK: Share Meme Handling
-extension ViewController{
+extension EditMemeViewController{
     func initShare(){
         shareButton.isEnabled=false
     }
@@ -58,21 +66,32 @@ extension ViewController{
         shareButton.isEnabled=true
     }
     func share(){
-        let meme = saveMeme()
+        let meme = getMeme()
         let controller = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: nil)
+        controller.completionWithItemsHandler={(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) -> Void in
+            if(completed){
+                self.saveMeme(meme: meme)
+                self.exit()
+            }
+        }
         present(controller, animated: true, completion: nil)
     }
 }
 
 
 //MARK: Meme handling
-extension ViewController{
+extension EditMemeViewController{
     func handleBar(hidden hide:Bool){
         topBar.isHidden=hide
         bottomBar.isHidden=hide
     }
     
-    func saveMeme() -> Meme {
+    func saveMeme(meme: Meme){
+        // Add it to the memes array on the Application Delegate
+        (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+    }
+    
+    func getMeme() -> Meme {
         let memedImage = generateMemedImage()
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImage)
         return meme
@@ -92,7 +111,7 @@ extension ViewController{
 }
 
 //MARK: Keyboard handling
-extension ViewController{
+extension EditMemeViewController{
     func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
@@ -124,7 +143,7 @@ extension ViewController{
 
 
 //MARK: Image handling
-extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+extension EditMemeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func initImageViewController(){
         cameraButton.isEnabled=UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
     }
@@ -137,11 +156,12 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
+        dismiss(animated: true, completion: nil)
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
             imageView.image=image
-            enableShare()
+            hideTextField(hide: false)
+            enableShare() 
         }
-        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func openImageController(_ sender: UIBarItem) {
@@ -153,13 +173,14 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         case .gallary:
             controller.sourceType = .photoLibrary
         }
-        
+       controller.allowsEditing=false
         present(controller, animated: true, completion: nil)
     }
 }
 
 //MARK: Textfields handling
-extension ViewController: UITextFieldDelegate{
+extension EditMemeViewController: UITextFieldDelegate{
+ 
     func initTextFields(){
         let memeTextAttributes:[String: Any] = [
             NSAttributedStringKey.strokeColor.rawValue: UIColor.black,
@@ -168,6 +189,7 @@ extension ViewController: UITextFieldDelegate{
             NSAttributedStringKey.strokeWidth.rawValue: -4]
         setTextField(topTextField, text: "TOP", defaultAttr: memeTextAttributes)
         setTextField(bottomTextField, text: "BOTTOM", defaultAttr: memeTextAttributes)
+        hideTextField(hide: true)
     }
     
     
@@ -177,6 +199,11 @@ extension ViewController: UITextFieldDelegate{
         textField.textAlignment = .center
         textField.text = text
         textField.borderStyle = .none
+    }
+    
+    func hideTextField(hide: Bool){
+        topTextField.isHidden=hide
+        bottomTextField.isHidden=hide
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
